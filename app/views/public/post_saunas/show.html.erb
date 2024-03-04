@@ -5,7 +5,7 @@
       <%= render 'public/users/info', user: @user %>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-3">
       <h2>サウナ詳細</h2>
       <div class="card" style="width: 25rem;">
         <%= image_tag @post_sauna.get_image %>
@@ -13,68 +13,70 @@
           <h5 class="card-title"><%= @post_sauna.name %></h5>
           <p class="card-text">感想：<%= @post_sauna.impression %></p>
           <p class="card-text">投稿日：<%= @post_sauna.created_at.strftime('%Y/%m/%d') %></p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">所在地：<%= @post_sauna.address %></li>
+            <li class="list-group-item">利用料金：<%= @post_sauna.price %>円</li>
+            <li class="list-group-item">カテゴリー：<%= link_to @post_sauna.category, tagsearches_search_path(content:@post_sauna.category)%></li>
+            <li class="list-group-item">評価：<%= render "static.rate", post_sauna: @post_sauna %></li>
+          </ul>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">所在地：<%= @post_sauna.address %></li>
-          <li class="list-group-item">利用料金：<%= @post_sauna.price %>円</li>
-          <li class="list-group-item">カテゴリー：<%= link_to @post_sauna.category, tagsearches_search_path(content:@post_sauna.category)%></li>
-          <li class="list-group-item">評価：<%= render "static.rate", post_sauna: @post_sauna %></li>
-        </ul>
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <% if @post_sauna.favorited_by?(current_user) %>
-              <p class="px-2">
-                <%= link_to post_sauna_favorite_path(@post_sauna), method: :delete, class: "text-danger", data: { confirm: "本当にいいねを取り消しますか？" } do %>
-                  <i class="fa-solid fa-heart"></i>
-                  <%= @post_sauna.favorites.count %> いいね
-                <% end %>
-              </p>
-            <% else %>
-              <p class="px-2">
-                <%= link_to post_sauna_favorite_path(@post_sauna), method: :post do %>
-                  <i class="fa-solid fa-heart"></i>
-                  <%= @post_sauna.favorites.count %> いいね
-                <% end %>
-              </p>
-            <% end %>
-            <p class="px-2">コメント数：<%= @post_sauna.post_comments.count %></p>
-          </div>
-        
-          <% @post_sauna.post_comments.each do |post_comment| %>
-            <div class="d-flex align-items-center">
-              <div class="pe-3">
-                <%= image_tag post_comment.user.get_profile_image(100,100), class: "rounded-circle", width: "50", height: "50" %>
-                <p><%= link_to post_comment.user.name, user_path(post_comment.user.id) %></p>
-              </div>
-              <div class="pt-4 px-3">
-                <p><%= post_comment.comment %></p>
-                <p>コメント日時：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-              </div>
-              <div class="pt-5 px-3">
-                <% if post_comment.user == current_user %>
-                  <%= link_to "コメント削除", post_sauna_post_comment_path(post_comment.post_sauna, post_comment), method: :delete, data: { confirm: "コメントを削除しますか？" }, class: "btn btn-sm btn-danger" %>
-                <% end %>
-              </div>
-            </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <% if @post_sauna.favorited_by?(current_user) %>
+            <p class="px-2">
+              <%= link_to post_sauna_favorite_path(@post_sauna), method: :delete, class: "text-danger", data: { confirm: "本当にいいねを取り消しますか？" } do %>
+                <i class="fa-solid fa-heart"></i>
+                <%= @post_sauna.favorites.count %> いいね
+              <% end %>
+            </p>
+          <% else %>
+            <p class="px-2">
+              <%= link_to post_sauna_favorite_path(@post_sauna), method: :post do %>
+                <i class="fa-solid fa-heart"></i>
+                <%= @post_sauna.favorites.count %> いいね
+              <% end %>
+            </p>
           <% end %>
-        
-          <div class="mt-3">
-            <%= form_with model: [@post_sauna, @post_comment] do |f| %>
-              <%= f.text_area :comment, class: "form-control", placeholder: "コメントを入力してください", rows: "3" %>
-              <%= f.submit "送信する", class: "btn btn-primary mt-2" %>
-            <% end %>
-          </div>
-        
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <% if @post_sauna.user == current_user %>
-              <%= link_to "サウナ情報編集", edit_post_sauna_path, class: "btn btn-warning" %>
-            <% end %>
-            <% if @post_sauna.user == current_user %>
-              <%= link_to "投稿削除", post_sauna_path(@post_sauna), method: :delete, data: { confirm: "本当にこの投稿を削除しますか？" }, class: "btn btn-danger" %>
-            <% end %>
-          </div>
+          <p class="px-2">コメント数：<%= @post_sauna.post_comments.count %></p>
         </div>
 
+        <% @post_sauna.post_comments.each do |post_comment| %>
+          <div class="d-flex align-items-center">
+            <div class="pe-3">
+              <%= image_tag post_comment.user.get_profile_image(100,100), class: "rounded-circle", width: "50", height: "50" %>
+              <p><%= link_to post_comment.user.name, user_path(post_comment.user.id) %></p>
+            </div>
+            <div class="pt-4 px-3">
+              <p><%= post_comment.comment %></p>
+              <p>コメント日時：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+            </div>
+            <div class="pt-5 px-3">
+              <% if post_comment.user == current_user %>
+                <%= link_to "コメント削除", post_sauna_post_comment_path(post_comment.post_sauna, post_comment), method: :delete, data: { confirm: "コメントを削除しますか？" }, class: "btn btn-sm btn-danger" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="mt-3">
+          <%= form_with model: [@post_sauna, @post_comment] do |f| %>
+            <%= f.text_area :comment, class: "form-control", placeholder: "コメントを入力してください", rows: "3" %>
+            <%= f.submit "送信する", class: "btn btn-primary mt-2" %>
+          <% end %>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-3">
+          <% if @post_sauna.user == current_user %>
+            <%= link_to "サウナ情報編集", edit_post_sauna_path, class: "btn btn-warning" %>
+          <% end %>
+          <% if @post_sauna.user == current_user %>
+            <%= link_to "投稿削除", post_sauna_path(@post_sauna), method: :delete, data: { confirm: "本当にこの投稿を削除しますか？" }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
       </div>
     </div>
 
