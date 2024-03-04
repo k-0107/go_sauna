@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-md-7 mt-3">
-      <h4><i class="fa-solid fa-fire-flame-curved"></i><%= @user.name %>さんフォロワー一覧</h4>
+      <h4><i class="fa-solid fa-fire-flame-curved"></i> <%= @user.name %>さんフォロワー一覧</h4>
       <% if @users.exists? %>
         <%= render 'public/users/user.index', users: @users %>
       <% else %>

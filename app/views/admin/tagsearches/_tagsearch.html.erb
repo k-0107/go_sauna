@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-end">
   <%= form_with url: admin_tagsearches_search_path, method: :get, class: "d-flex align-items-center", local: true do |f| %>
     <%= f.text_field :content, class: "form-control me-2", placeholder: "カテゴリーを検索" %>
-    <%= f.submit '検索', class: "btn btn-info" %>
+    <%= f.submit '検索', class: "btn btn-outline-secondary" %>
   <% end %>
 </div>
