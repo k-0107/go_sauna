@@ -1,0 +1,18 @@
+<div class="containar mt-3">
+  <div class="row">
+
+    <div class="col-md-3 offset-md-1 mt-3">
+      <%= render 'info', user: @user %>
+    </div>
+
+    <div class="col-md-8">
+      <h2>"<%= @user.name %>"いいね投稿一覧</h2>
+        <% if @liked_post_saunas.exists? %>
+          <%= render "public/post_saunas/post_sauna.index", post_saunas: @liked_post_saunas %>
+        <% else %>
+          <p>※ユーザーがいいねした投稿はまだありません<p>
+        <% end %>
+    </div>
+
+  </div>
+</div>

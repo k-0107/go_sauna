@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>go_sauna</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <script src="https://kit.fontawesome.com/4ef0a00ebe.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body class="d-flex flex-column vh-100">
+  <header class="shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Fifth navbar example">
+      <div class="container">
+        <% if user_signed_in? || admin_signed_in? %>
+          <%= link_to root_path, class: "navbar-brand" do %>
+            <%= image_tag('logo.png', size: "60x60") %>
+          <% end %>
+        <% else %>
+          <%= link_to root_path, class: "navbar-brand" do %>
+            <%= image_tag('logo.png', size: "60x60") %>
+          <% end %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "MyPage", user_path(current_user.id), class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Users", users_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sauna", post_saunas_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Logout", destroy_user_session_path,  method: :delete, class:"nav-link" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "ユーザー一覧", admin_users_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "サウナ一覧", admin_post_saunas_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "About", about_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Signup", new_user_registration_path, class:"nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Login", new_user_session_path, class:"nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+          <% if user_signed_in? || admin_signed_in? %>
+            <div class="ml-auto">
+                <% if user_signed_in? %>
+                  <%= render 'public/tagsearches/tagsearch' %>
+                <% elsif admin_signed_in? %>
+                  <%= render 'admin/tagsearches/tagsearch' %>
+                <% end %>
+                <%= form_tag(searches_search_path, method: :get, class: "d-flex align-items-center") do %>
+                  <%= select_tag 'range', options_for_select([['---選択してください---', ''], ['ユーザー', '1'], ['サウナ', '2']], class: "form-select me-2") %>
+                  <%= select_tag 'search', options_for_select([["完全一致", "perfect_match"], ["部分一致", "partial_match"]], class: "form-select me-2") %>
+                  <%= text_field_tag :word, nil, class: "form-control me-2", placeholder: "キーワードを入力" %>
+                  <%= submit_tag "検索", class: "btn btn-info" %>
+                <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="mb-auto">
+    <% flash.each do |message_type, message| %>
+      <div class="flash-message <%= message_type %> text-center mt-2"><%= message %></div>
+    <% end %>
+    <%= yield %>
+  </main>
+  <footer class="bg-dark pt-5 pb-4">
+  </footer>
+</body>
+
+</html>

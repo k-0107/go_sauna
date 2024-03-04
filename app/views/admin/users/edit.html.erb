@@ -1,0 +1,63 @@
+<div class="container mt-4 mb-3">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <% if @user.errors.any? %>
+        <div class="alert alert-danger" role="alert">
+          <%= pluralize(@user.errors.count, "エラー") %>が発生しました
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="card text-center">
+        <div class="card-header">
+          <h2>ユーザー情報編集</h2>
+        </div>
+        <%= form_with model: @user, url: admin_users_information_update_path(@user), html: { multipart: true } do |f| %>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <label>会員ID</label><br>
+                <%= @user.id %>
+              </li>
+              <li class="list-group-item">
+                <label for="inputImage">プロフィール画像</label><br>
+                <%= f.file_field :profile_image, class: "form-control", accept: "image/*" %>
+              </li>
+              <li class="list-group-item">
+                <label for="inputName">ユーザーネーム</label><br>
+                <%= f.text_field :name, autofocus: true, class: "form-control", id: "inputName", placeholder: "名前" %>
+              </li>
+              <li class="list-group-item">
+                <label for="inputIntroduction">自己紹介</label><br>
+                <%= f.text_area :introduction, class: "form-control", id: "inputIntroduction", placeholder: "自己紹介" %>
+              </li>
+              <li class="list-group-item">
+                <label for="inputImage">ドリンク画像</label><br>
+                <%= f.file_field :favorite_drink_image, class: "form-control", accept: "image/*" %>
+              </li>
+              <li class="list-group-item">
+                <label for="inputFavoriteDrink">お気に入りのドリンク</label><br>
+                <%= f.text_field :favorite_drink, autofocus: true, class: "form-control", id: "inputFavoriteDrink", placeholder: "お気に入りの飲み物" %>
+              </li>
+              <li class="list-group-item">
+                <label>ステータス</label><br>
+                <div class="form-check form-check-inline">
+                  <%= f.radio_button :is_active, true, id: "is_active_true", class: "form-check-input" %>
+                  <%= label_tag "is_active_true", "有効", class: "form-check-label" %>
+                </div>
+                <div class="form-check form-check-inline">
+                  <%= f.radio_button :is_active, false, id: "is_active_false", class: "form-check-input" %>
+                  <%= label_tag "is_active_false", "利用停止", class: "form-check-label" %>
+                </div>
+              </li>
+            </ul>
+            <%= f.submit "編集する", class: "btn btn-primary mt-3" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

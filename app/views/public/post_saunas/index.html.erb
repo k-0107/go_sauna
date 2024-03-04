@@ -1,0 +1,18 @@
+<div class="containar">
+  <div class="row">
+
+    <div class="col-md-3 offset-md-1 mt-3">
+      <%= render 'public/users/info', user: current_user %>
+    </div>
+
+    <div class="col-md-7 mt-3">
+      <h2>サウナ一覧</h2>
+      <% if @post_saunas.exists? %>
+        <%= render "post_sauna.index", post_saunas: @post_saunas %>
+      <% else %>
+        <p>※投稿はまだありません<p>
+      <% end %>
+    </div>
+
+  </div>
+</div>

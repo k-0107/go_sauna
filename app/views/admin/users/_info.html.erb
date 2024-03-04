@@ -1,0 +1,43 @@
+<h4 class="ml-3"><i class="fa-solid fa-fire-flame-curved"></i> User</h4>
+<div class="ml-5 mb-2">
+  Profile:<%= image_tag user.get_profile_image(100,100) ,class:"mr-4" %>
+  Drink:<%= image_tag user.get_favorite_drink_image(100,100) %>
+</div>
+
+<table class="table">
+  <tr>
+    <td noWrap>ユーザーネーム</td>
+    <td><%= link_to user.name, admin_user_path(user) %></td>
+  </tr>
+  <tr>
+    <td>自己紹介</td>
+    <td><%= user.introduction %></td>
+    </tr>
+  <tr>
+    <td>お気に入り<br>ドリンク</td>
+    <td><%= user.favorite_drink %></td>
+  </tr>
+  <tr>
+    <td>フォロー数</td>
+    <td><%= link_to user.followings.count, admin_user_followings_path(user) %></td>
+  </tr>
+  <tr>
+    <td>フォロワー数</td>
+    <td><%= link_to user.followers.count, admin_user_followers_path(user) %></td>
+  </tr>
+  <tr>
+    <td>ステータス</td>
+    <td>
+      <% if user.is_active %>
+        <span class="badge badge-success">有効</span>
+      <% else %>
+        <span class="badge badge-danger">利用停止</span>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<div class="row d-flex flex-column">
+    <%= link_to "ユーザー情報編集", edit_admin_user_path(user), class:"btn btn-secondary w-50 my-2 mx-5" %>
+    <%= link_to "いいね一覧", liked_post_saunas_admin_user_path(user), class:"btn btn-secondary w-50 my-2 mx-5" %>
+</div>
+

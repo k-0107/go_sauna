@@ -1,0 +1,41 @@
+<!--サウナ一覧 -->
+<% if @range == '2' %>
+  <div class="containar">
+    <div class="row">
+
+      <div class="col-md-3">
+        <%= render 'public/users/info', user: current_user %>
+      </div>
+
+      <div class="col-md-9">
+        <h2>"<%= @word %>"絞り込み検索結果一覧</h2>
+        <% if @post_sauna.exists? %>
+          <%= render "public/post_saunas/post_sauna.index", post_saunas: @post_sauna %>
+        <% else %>
+          <p>※該当する投稿はまだありません<p>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+<% else %>
+  <!--ユーザー一覧 -->
+  <div class="containar">
+    <div class="row">
+
+      <div class="col-md-3">
+        <%= render 'public/users/info', user: current_user %>
+      </div>
+
+      <div class="col-md-9">
+        <h2>"<%= @word %>"絞り込み検索結果一覧</h2>
+        <% if @user.exists? %>
+          <%= render 'public/users/user.index', users: @user %>
+        <% else %>
+          <p>※該当するユーザーはまだ登録されていません<p>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+<% end %>

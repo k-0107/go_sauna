@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr noWrap>
+      <th>会員ID</th>
+      <th>ユーザーネーム</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+  <% users.each do |user| %>
+    <tbody>
+      <tr noWrap>
+        <td><%= user.id %></td>
+        <td><%= link_to user.name, admin_user_path(user) %></td>
+        <td><%= user.email %></td>
+        <td>
+          <% if user.is_active %>
+            <span class="badge badge-primary">有効</span>
+          <% else %>
+            <span class="badge badge-danger">利用停止</span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
+<%= paginate users %>
