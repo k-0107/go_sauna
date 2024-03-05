@@ -1,14 +1,14 @@
 <!--サウナ一覧 -->
 <% if @range == '2' %>
-  <div class="containar">
+  <div class="containar mt-3">
     <div class="row">
 
-      <div class="col-md-3">
+      <div class="col-md-3 offset-md-1">
         <%= render 'public/users/info', user: current_user %>
       </div>
 
-      <div class="col-md-9">
-        <h2>"<%= @word %>"絞り込み検索結果一覧</h2>
+      <div class="col-md-8">
+        <h4><i class="fa-solid fa-fire-flame-curved"></i> "<%= @word %>"絞り込み検索結果一覧</h4>
         <% if @post_sauna.exists? %>
           <%= render "public/post_saunas/post_sauna.index", post_saunas: @post_sauna %>
         <% else %>
@@ -20,15 +20,15 @@
   </div>
 <% else %>
   <!--ユーザー一覧 -->
-  <div class="containar">
+  <div class="containar mt-3">
     <div class="row">
 
-      <div class="col-md-3">
+      <div class="col-md-3 offset-md-1">
         <%= render 'public/users/info', user: current_user %>
       </div>
 
-      <div class="col-md-9">
-        <h2>"<%= @word %>"絞り込み検索結果一覧</h2>
+      <div class="col-md-8">
+        <h4 class="ml-5"><i class="fa-solid fa-fire-flame-curved"></i> "<%= @word %>"絞り込み検索結果一覧</h4>
         <% if @user.exists? %>
           <%= render 'public/users/user.index', users: @user %>
         <% else %>

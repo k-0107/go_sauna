@@ -21,7 +21,7 @@
             <td class="nowrap"><%= user.favorite_drink %></td>
             <td class="nowrap">フォロー数：<%= link_to user.followings.count, user_followings_path(user) %></td>
             <td class="nowrap">フォロワー数：<%= link_to user.followers.count, user_followers_path(user) %></td>
-            <td class="nowrap"><%= render "public/relationships/btn", user: user, options: { class: "btn btn-primary" } %></td>
+            <td class="nowrap"><%= render "public/relationships/btn", user: user, options: { class: "btn btn-outline-primary" } %></td>
           </tr>
         <% end %>
       </tbody>

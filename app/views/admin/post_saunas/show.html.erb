@@ -1,13 +1,13 @@
 <div class="containar mt-3 mb-3">
   <div class="row">
 
-    <div class="col-md-3 offset-md-1 mt-3">
+    <div class="col-md-3 offset-md-1">
       <%= render 'admin/users/info', user: @user %>
     </div>
 
     <div class="col-md-8">
-      <h2>サウナ詳細</h2>
-      <div class="card" style="width: 50rem;">
+      <h4 class="mb-3"><i class="fa-solid fa-fire-flame-curved"></i> サウナ詳細</h4>
+      <div class="card" style="width: 25rem;">
         <%= image_tag @post_sauna.get_image %>
         <div class="card-body">
           <h5 class="card-title"><%= @post_sauna.name %></h5>
@@ -30,7 +30,7 @@
             <p class="px-2">コメント数：<%= @post_sauna.post_comments.count %></p>
           </div>
           <% @post_sauna.post_comments.each do |post_comment| %>
-            <div class="d-flex">
+            <div class="d-flex mt-2">
                 <div class="pe-3">
                   <%= image_tag post_comment.user.get_profile_image(100,100) %>
                   <p><%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %></p>
@@ -39,13 +39,13 @@
                   <p><%= post_comment.comment %></p>
                   <p>コメント日時：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
                 </div>
-                <div class="pt-4 px-3">
-                  <%= link_to "コメント削除", admin_post_sauna_post_comment_path(post_comment.post_sauna, post_comment), method: :delete, data: {confirm: "コメントを削除しますか？"}, class:"btn btn-danger" %>
-                </div>
+            </div>
+            <div class="px-2">
+              <%= link_to "コメント削除", admin_post_sauna_post_comment_path(post_comment.post_sauna, post_comment), method: :delete, data: {confirm: "コメントを削除しますか？"}, class:"btn btn-danger btn-sm" %>
             </div>
           <% end %>
-          <div class="d-flex pt-3">
-            <p class="mx-3"><%= link_to "投稿削除", admin_post_sauna_path(@post_sauna), method: :delete, data: {confirm: "投稿を削除しますか？"}, class:"btn btn-danger" %></p>
+          <div class="text-right pt-3">
+            <p class="mx-3"><%= link_to "投稿削除", admin_post_sauna_path(@post_sauna), method: :delete, data: {confirm: "投稿を削除しますか？"}, class:"btn btn-outline-danger" %></p>
           </div>
         </div>
       </div>
