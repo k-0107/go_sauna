@@ -15,9 +15,9 @@
       <tbody>
         <% users.each do |user| %>
           <tr>
-            <td class="nowrap"><%= image_tag user.get_profile_image(100, 100) %></td>
+            <td class="nowrap"><%= image_tag user.get_profile_image(100, 100),class:"rounded" %></td>
             <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
-            <td class="nowrap"><%= image_tag user.get_favorite_drink_image(100, 100) %></td>
+            <td class="nowrap"><%= image_tag user.get_favorite_drink_image(100, 100),class:"rounded" %></td>
             <td class="nowrap"><%= user.favorite_drink %></td>
             <td class="nowrap">フォロー数：<%= link_to user.followings.count, user_followings_path(user) %></td>
             <td class="nowrap">フォロワー数：<%= link_to user.followers.count, user_followers_path(user) %></td>

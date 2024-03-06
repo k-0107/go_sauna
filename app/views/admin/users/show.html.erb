@@ -11,7 +11,7 @@
         <% if @post_saunas.exists? %>
           <% @post_saunas.each do |post_sauna| %>
             <div class="card" style="width: 19rem;">
-              <%= image_tag post_sauna.get_image %>
+              <%= image_tag post_sauna.get_image,class:"rounded" %>
               <div class="card-body">
                 <h5 class="card-title"><%= link_to post_sauna.name, admin_post_sauna_path(post_sauna)%></h5>
                 <p class="card-text">感想：<%= post_sauna.impression %></p>

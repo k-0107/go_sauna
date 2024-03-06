@@ -8,7 +8,7 @@
     <div class="col-md-8">
       <h4 class="mb-3"><i class="fa-solid fa-fire-flame-curved"></i> サウナ詳細</h4>
       <div class="card" style="width: 25rem;">
-        <%= image_tag @post_sauna.get_image %>
+        <%= image_tag @post_sauna.get_image,class:"rounded" %>
         <div class="card-body">
           <h5 class="card-title"><%= @post_sauna.name %></h5>
           <p class="card-text">感想：<%= @post_sauna.impression %></p>
@@ -32,7 +32,7 @@
           <% @post_sauna.post_comments.each do |post_comment| %>
             <div class="d-flex mt-2">
                 <div class="pe-3">
-                  <%= image_tag post_comment.user.get_profile_image(100,100) %>
+                  <%= image_tag post_comment.user.get_profile_image(100,100),class:"rounded" %>
                   <p><%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %></p>
                 </div>
                 <div class="pt-4 px-3">
