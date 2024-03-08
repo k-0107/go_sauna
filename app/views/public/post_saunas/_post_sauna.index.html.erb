@@ -4,7 +4,7 @@
       <%= image_tag post_sauna.get_image, class: "card-img-top rounded", height: "200px", alt: "サウナ画像" %>
       <div class="card-body">
         <h5 class="card-title"><%= link_to post_sauna.name, post_sauna_path(post_sauna) %></h5>
-        <p class="card-text">感想：<%= post_sauna.impression %></p>
+        <p class="card-text text">感想：<%= post_sauna.impression %></p>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">所在地：<%= post_sauna.address %></li>
