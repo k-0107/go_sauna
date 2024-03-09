@@ -6,7 +6,7 @@
     </div>
 
     <div class="col-md-3 mt-3">
-      <h4>サウナ詳細</h4>
+      <h4><i class="fa-solid fa-fire-flame-curved"></i> サウナ詳細</h4>
       <div class="card" style="width: 25rem;">
         <%= image_tag @post_sauna.get_image,class:"rounded" %>
         <div class="card-body">
@@ -65,7 +65,7 @@
         <div class="mt-3">
           <%= form_with model: [@post_sauna, @post_comment] do |f| %>
             <%= f.text_area :comment, class: "form-control", placeholder: "コメントを入力してください", rows: "3" %>
-            <%= f.submit "送信する", class: "btn btn-primary mt-2" %>
+            <%= f.submit "送信する", class: "btn submit mt-2" %>
           <% end %>
         </div>
 

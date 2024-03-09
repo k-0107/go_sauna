@@ -28,12 +28,12 @@
 </table>
 <div class="row d-flex flex-column">
   <% if current_user == user %>
-    <%= link_to "新規投稿", new_post_sauna_path, class:"btn btn-success my-4 mx-5" %>
-    <%= link_to "いいね一覧", liked_post_saunas_user_path(current_user), class:"badge badge-secondary my-2 mx-5" %>
-    <%= link_to "ユーザー情報編集", users_information_edit_path(user), class:"badge badge-secondary my-2 mx-5" %>
+    <%= link_to "新規投稿", new_post_sauna_path, class:"btn my-4 mx-5 new_post" %>
+    <%= link_to "いいね一覧", liked_post_saunas_user_path(current_user), class:"badge info my-2 mx-5" %>
+    <%= link_to "ユーザー情報編集", users_information_edit_path(user), class:"badge info my-2 mx-5" %>
   <% else %>
     <%= render "public/relationships/btn", user: user, options: { class: ""} %>
-    <%= link_to "いいね一覧", liked_post_saunas_user_path(user), class:"btn btn-secondary w-50 my-2 mx-5" %>
+    <%= link_to "いいね一覧", liked_post_saunas_user_path(user), class:"btn info my-2 mx-5" %>
   <% end %>
 </div>
 

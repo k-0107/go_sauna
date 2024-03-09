@@ -1,15 +1,50 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+a{
+  text-decoration: none !important;
+  position: relative;
+  display: inline-block;
+  transition: .3s;
+  color:#20b2aa;
+}
+
+a::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #d4dcda;
+  transition: .2s;
+  transform: translateX(-50%);
+}
+
+a:hover::after{
+  width: 100%;
+}
+
+.new_post{
+  background-color: #a8ffd3;
+}
+
+.info{
+  color:#000000;
+  background-color: #cecece;
+}
+
+.follow{
+  background-color: #99ccff;
+}
+
+.followed{
+  background-color: #fff;
+  border-color: #cecece
+}
+
+.submit{
+  background-color: #99ccff;
+}
+
+.devise{
+  color: #344955;
+  background-color: #AAD7D9;
+}
