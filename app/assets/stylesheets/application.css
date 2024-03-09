@@ -3,7 +3,7 @@ a{
   position: relative;
   display: inline-block;
   transition: .3s;
-  color:#20b2aa;
+  color:#2D9596;
 }
 
 a::after {
@@ -23,7 +23,7 @@ a:hover::after{
 }
 
 .new_post{
-  background-color: #a8ffd3;
+  background-color: #AAD7D9;
 }
 
 .info{
