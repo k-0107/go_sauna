@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "seedの実行を開始"
+
 Admin.create!(
    email: 'admin@admin',
    password: 'testtest'
@@ -84,3 +86,5 @@ Favorite.find_or_create_by!(user: tarou, post_sauna: PostSauna.find_by(name: "�
 mike.follow(jack)
 tarou.follow(jack)
 jack.follow(mike)
+
+puts "seedの実行が完了しました"
