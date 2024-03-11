@@ -12,18 +12,18 @@
   <tr>
     <td>自己紹介</td>
     <td><%= user.introduction %></td>
-    </tr>
+  </tr>
   <tr>
     <td>お気に入り<br>ドリンク</td>
     <td><%= user.favorite_drink %></td>
   </tr>
   <tr>
     <td>フォロー数</td>
-    <td><%= link_to user.followings.count, user_followings_path(user) %></td>
+    <td class="following_count-<%= user.id %>"><%= render "public/relationships/following_count", user: user %></td>
   </tr>
   <tr>
     <td>フォロワー数</td>
-    <td><%= link_to user.followers.count, user_followers_path(user) %></td>
+    <td class="follower_count-<%= user.id %>"><%= render "public/relationships/follower_count", user: user %></td>
   </tr>
 </table>
 <div class="row d-flex flex-column">
@@ -32,7 +32,9 @@
     <%= link_to "いいね一覧", liked_post_saunas_user_path(current_user), class:"badge info my-2 mx-5" %>
     <%= link_to "ユーザー情報編集", users_information_edit_path(user), class:"badge info my-2 mx-5" %>
   <% else %>
-    <%= render "public/relationships/btn", user: user, options: { class: ""} %>
+    <div class="d-flex flex-column" id="follow-contents-<%= user.id %>">
+      <%= render "public/relationships/btn", user: user, options: { class: ""} %>
+    </div>
     <%= link_to "いいね一覧", liked_post_saunas_user_path(user), class:"btn info my-2 mx-5" %>
   <% end %>
 </div>

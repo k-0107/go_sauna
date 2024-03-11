@@ -20,6 +20,8 @@
 ・ 自分のお気に入りの場所、サウナドリンクを投稿する時
 ​
 ## 設計書
+・ ER図(https://drive.google.com/file/d/1K2v56QsnDxJoZrw29GkO3O-p_0-YRlCR/view?usp=drive_link)
+・ テーブル定義書(https://docs.google.com/spreadsheets/d/1m-IGdZc86nkwGK9pYUTIIDyssCKJILqD/edit#gid=136342688)
 ​
 ## 開発環境
 - OS：Linux(CentOS)

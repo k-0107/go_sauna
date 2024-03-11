@@ -10,6 +10,8 @@
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -19,9 +21,11 @@
             <td class="nowrap"><%= link_to user.name, user_path(user) %></td>
             <td class="nowrap"><%= image_tag user.get_favorite_drink_image(100, 100),class:"rounded" %></td>
             <td class="nowrap"><%= user.favorite_drink %></td>
-            <td class="nowrap">フォロー数：<%= link_to user.followings.count, user_followings_path(user) %></td>
-            <td class="nowrap">フォロワー数：<%= link_to user.followers.count, user_followers_path(user) %></td>
-            <td class="nowrap"><%= render "public/relationships/btn", user: user, options: { class: "" } %></td>
+            <td class="nowrap">フォロー:</td>
+            <td class="nowrap following_count-<%= user.id %>"><%= render "public/relationships/following_count", user: user %></td>
+            <td class="nowrap">フォロワー:</td>
+            <td class="nowrap follower_count-<%= user.id %>"><%= render "public/relationships/follower_count", user: user %></td>
+            <td class="nowrap" id="follow-contents-<%= user.id %>"><%= render "public/relationships/btn", user: user, options: { class: "" } %></td>
           </tr>
         <% end %>
       </tbody>
