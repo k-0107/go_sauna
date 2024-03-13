@@ -13,112 +13,111 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
 
-<body class="d-flex flex-column vh-100 klee-one-regular">
-  <header class="shadow-sm">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Fifth navbar example">
-      <div class="container">
-        <% if user_signed_in? || admin_signed_in? %>
-          <%= link_to about_path, class: "navbar-brand" do %>
-            <%= image_tag('logo.png', size: "60x60") %>
-          <% end %>
-        <% else %>
-          <%= link_to root_path, class: "navbar-brand" do %>
-            <%= image_tag('logo.png', size: "60x60") %>
-          <% end %>
-        <% end %>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav me-auto mb-lg-0">
-            <% if user_signed_in? %>
-              <li class="nav-item mx-3">
-                <%= link_to user_path(current_user.id), class: "nav-link" do %>
-                  <i class="fa-solid fa-user"></i> MyPage
-                <% end %>
-              </li>
-              <li class="nav-item mr-3">
-                <%= link_to users_path, class:"nav-link" do %>
-                  <i class="fa-solid fa-users"></i> Users
-                <% end %>
-              </li>
-              <li class="nav-item mr-3">
-                <%= link_to post_saunas_path, class:"nav-link" do %>
-                 <i class="fa-solid fa-dumpster-fire"></i> Sauna
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to destroy_user_session_path,  method: :delete, class:"nav-link" do %>
-                 <i class="fa-solid fa-right-from-bracket"></i> Logout
-                <% end %>
-              </li>
-            <% elsif admin_signed_in? %>
-              <li class="nav-item mx-3">
-                <%= link_to admin_users_path, class:"nav-link" do %>
-                  <i class="fa-solid fa-users"></i> ユーザー一覧
-                <% end %>
-              </li>
-              <li class="nav-item mr-3">
-                <%= link_to admin_post_saunas_path, class:"nav-link" do %>
-                 <i class="fa-solid fa-dumpster-fire"></i> サウナ一覧
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link" do %>
-                 <i class="fa-solid fa-right-from-bracket"></i> ログアウト
-                <% end %>
-              </li>
-            <% else %>
-              <li class="nav-item mx-3">
-                <%= link_to about_path, class:"nav-link" do %>
-                 <i class="fa-solid fa-dumpster-fire"></i> About
-                <% end %>
-              </li>
-              <li class="nav-item mr-3">
-                <%= link_to new_user_registration_path, class:"nav-link" do %>
-                  <i class="fa-solid fa-user-plus"></i> Signup
-                <% end %>
-              </li>
-              <li class="nav-item">
-                <%= link_to new_user_session_path, class:"nav-link" do %>
-                  <i class="fa-solid fa-right-to-bracket"></i> Login
-                <% end %>
-              </li>
+  <body class="d-flex flex-column vh-100 klee-one-regular">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Fifth navbar example">
+        <div class="container">
+          <% if user_signed_in? || admin_signed_in? %>
+            <%= link_to about_path, class: "navbar-brand" do %>
+              <%= image_tag('logo.png', size: "60x60") %>
             <% end %>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <main class="mb-auto">
-    <% flash.each do |message_type, message| %>
-      <div class="flash-message <%= message_type %> text-center mt-2"><%= message %></div>
-    <% end %>
-    <%= yield %>
-
-  </main>
-  <footer class="bg-light pb-3 pt-3">
-      <div class="container">
-          <div class="row">
-              <% if user_signed_in? || admin_signed_in? %>
-                <div class="col-md-6 offset-md-9">
-                    <% if user_signed_in? %>
-                        <%= render 'public/tagsearches/tagsearch' %>
-                    <% elsif admin_signed_in? %>
-                        <%= render 'admin/tagsearches/tagsearch' %>
-                    <% end %>
-                    <%= form_tag(searches_search_path, method: :get, class: "d-flex align-items-center") do %>
-                        <%= select_tag 'range', options_for_select([['---選択してください---', ''], ['ユーザー', '1'], ['サウナ', '2']], class: "form-select") %>
-                        <%= select_tag 'search', options_for_select([["完全一致", "perfect_match"], ["部分一致", "partial_match"]], class: "form-select") %>
-                        <%= text_field_tag :word, nil, class: "form-control", placeholder: "キーワードを入力" %>
-                        <%= submit_tag "検索", class: "btn btn-outline-secondary" %>
-                    <% end %>
-                </div>
+          <% else %>
+            <%= link_to root_path, class: "navbar-brand" do %>
+              <%= image_tag('logo.png', size: "60x60") %>
+            <% end %>
+          <% end %>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto mb-lg-0">
+              <% if user_signed_in? %>
+                <li class="nav-item mx-3">
+                  <%= link_to user_path(current_user.id), class: "nav-link" do %>
+                    <i class="fa-solid fa-user"></i> MyPage
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to users_path, class:"nav-link" do %>
+                    <i class="fa-solid fa-users"></i> Users
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to post_saunas_path, class:"nav-link" do %>
+                   <i class="fa-solid fa-dumpster-fire"></i> Sauna
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_user_session_path,  method: :delete, class:"nav-link" do %>
+                   <i class="fa-solid fa-right-from-bracket"></i> Logout
+                  <% end %>
+                </li>
+              <% elsif admin_signed_in? %>
+                <li class="nav-item mx-3">
+                  <%= link_to admin_users_path, class:"nav-link" do %>
+                    <i class="fa-solid fa-users"></i> ユーザー一覧
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to admin_post_saunas_path, class:"nav-link" do %>
+                   <i class="fa-solid fa-dumpster-fire"></i> サウナ一覧
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to destroy_admin_session_path, method: :delete, class:"nav-link" do %>
+                   <i class="fa-solid fa-right-from-bracket"></i> ログアウト
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="nav-item mx-3">
+                  <%= link_to about_path, class:"nav-link" do %>
+                   <i class="fa-solid fa-dumpster-fire"></i> About
+                  <% end %>
+                </li>
+                <li class="nav-item mr-3">
+                  <%= link_to new_user_registration_path, class:"nav-link" do %>
+                    <i class="fa-solid fa-user-plus"></i> Signup
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class:"nav-link" do %>
+                    <i class="fa-solid fa-right-to-bracket"></i> Login
+                  <% end %>
+                </li>
               <% end %>
+            </ul>
           </div>
-      </div>
-  </footer>
-
-</body>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
+      <% flash.each do |message_type, message| %>
+        <div class="flash-message <%= message_type %> text-center mt-2"><%= message %></div>
+      <% end %>
+      <%= yield %>
+    </main>
+    <footer class="bg-light pb-3 pt-3">
+        <div class="container">
+            <div class="row">
+                <% if user_signed_in? || admin_signed_in? %>
+                  <div class="col-md-6 offset-md-9">
+                      <% if user_signed_in? %>
+                          <%= render 'public/tagsearches/tagsearch' %>
+                      <% elsif admin_signed_in? %>
+                          <%= render 'admin/tagsearches/tagsearch' %>
+                      <% end %>
+                      <%= form_tag(searches_search_path, method: :get, class: "d-flex align-items-center") do %>
+                          <%= select_tag 'range', options_for_select([['---選択してください---', ''], ['ユーザー', '1'], ['サウナ', '2']], class: "form-select") %>
+                          <%= select_tag 'search', options_for_select([["完全一致", "perfect_match"], ["部分一致", "partial_match"]], class: "form-select") %>
+                          <%= text_field_tag :word, nil, class: "form-control", placeholder: "キーワードを入力" %>
+                          <%= submit_tag "検索", class: "btn btn-outline-secondary" %>
+                      <% end %>
+                  </div>
+                <% end %>
+            </div>
+        </div>
+    </footer>
+  
+  </body>
 
 </html>
