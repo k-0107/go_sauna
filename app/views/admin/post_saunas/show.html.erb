@@ -5,7 +5,7 @@
       <%= render 'admin/users/info', user: @user %>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-3">
       <h4 class="mb-3"><i class="fa-solid fa-fire-flame-curved"></i> サウナ詳細</h4>
       <div class="card" style="width: 25rem;">
         <%= image_tag @post_sauna.get_image,class:"rounded" %>
@@ -20,36 +20,37 @@
           <li class="list-group-item">カテゴリー：<%= link_to @post_sauna.category, admin_tagsearches_search_path(content:@post_sauna.category)%></li>
           <li class="list-group-item">評価：<%= render "public/post_saunas/static.rate", post_sauna: @post_sauna %></li>
         </ul>
-        <div class="card-body">
-          <div class="d-flex">
-            <p class="px-2">
-              <i class="fa-solid fa-heart text-danger">
-                <%= @post_sauna.favorites.count %> いいね
-              </i>
-            </p>
-            <p class="px-2">コメント数：<%= @post_sauna.post_comments.count %></p>
-          </div>
-          <% @post_sauna.post_comments.each do |post_comment| %>
-            <div class="d-flex mt-2">
-                <div class="pe-3">
-                  <%= image_tag post_comment.user.get_profile_image(100,100),class:"rounded" %>
-                  <p><%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %></p>
-                </div>
-                <div class="pt-4 px-3">
-                  <p><%= post_comment.comment %></p>
-                  <p>コメント日時：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
-                </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card-body">
+        <div class="d-flex">
+          <p class="px-2">
+            <i class="fa-solid fa-heart text-danger">
+              <%= @post_sauna.favorites.count %> いいね
+            </i>
+          </p>
+          <p class="px-2">コメント数：<%= @post_sauna.post_comments.count %></p>
+        </div>
+        <% @post_sauna.post_comments.each do |post_comment| %>
+          <div class="d-flex mt-5">
+            <div class="pe-3">
+              <%= image_tag post_comment.user.get_profile_image(100,100),class:"rounded" %>
+              <p><%= link_to post_comment.user.name, admin_user_path(post_comment.user.id) %></p>
             </div>
-            <div class="px-2">
-              <%= link_to "コメント削除", admin_post_sauna_post_comment_path(post_comment.post_sauna, post_comment), method: :delete, data: {confirm: "コメントを削除しますか？"}, class:"btn btn-danger btn-sm" %>
+            <div class="pt-4 px-3">
+              <p><%= post_comment.comment %></p>
+              <p>コメント日時：<%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
             </div>
-          <% end %>
-          <div class="text-right pt-3">
-            <p class="mx-3"><%= link_to "投稿削除", admin_post_sauna_path(@post_sauna), method: :delete, data: {confirm: "投稿を削除しますか？"}, class:"btn btn-outline-danger" %></p>
           </div>
+          <div>
+            <%= link_to "コメント削除", admin_post_sauna_post_comment_path(post_comment.post_sauna, post_comment), method: :delete, data: {confirm: "コメントを削除しますか？"}, class:"btn btn-danger btn-sm" %>
+          </div>
+        <% end %>
+        <div class="text-right pt-3">
+          <p class="mx-3"><%= link_to "投稿削除", admin_post_sauna_path(@post_sauna), method: :delete, data: {confirm: "投稿を削除しますか？"}, class:"btn btn-outline-danger" %></p>
         </div>
       </div>
     </div>
-
   </div>
 </div>

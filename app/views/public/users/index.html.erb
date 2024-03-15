@@ -1,14 +1,11 @@
 <div class="containar">
   <div class="row">
-
     <div class="col-md-3 offset-md-1 mt-3">
       <%= render 'info', user: current_user %>
     </div>
-
     <div class="col-md-8 mt-3">
       <h4 class="ml-5"><i class="fa-solid fa-fire-flame-curved"></i> 会員一覧</h4>
         <%= render 'user.index', users: @users %>
     </div>
-
   </div>
 </div>

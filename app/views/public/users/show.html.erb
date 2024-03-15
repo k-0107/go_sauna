@@ -1,10 +1,8 @@
 <div class="containar mt-3">
   <div class="row">
-
     <div class="col-md-3 offset-md-1">
       <%= render 'info', user: @user %>
     </div>
-
     <div class="col-md-8">
       <h4><i class="fa-solid fa-fire-flame-curved"></i> <%= @user.name %>さんのサウナ投稿一覧</h4>
       <div class="d-flex flex-wrap">
@@ -38,6 +36,5 @@
       </div>
       <%= paginate @post_saunas %>
     </div>
-
   </div>
 </div>
