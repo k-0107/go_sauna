@@ -1,5 +1,4 @@
 class PostSauna < ApplicationRecord
-
   # サウナ画像
   has_one_attached :image
 
